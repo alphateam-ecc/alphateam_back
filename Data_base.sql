@@ -25,7 +25,7 @@ CREATE TABLE user_profiles (
 CREATE TABLE devices (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    type ENUM('AC','humidifier','curtain','window','fan','heater') NOT NULL,
+    type ENUM('AC','hd','curtain','window','fan') NOT NULL,
     status ENUM('on','off') DEFAULT 'off',
     location VARCHAR(100),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -114,6 +114,15 @@ CREATE TABLE manual_controls (
     humidity FLOAT,
     action ENUM('on','off','adjust') DEFAULT 'adjust',
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (device_id) REFERENCES devices(id) ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+    FOREIGN KEY (device_id) REFERENCES devices(id) ON DELETE CASCADE
 );
+-- --- 手動でのデバイス制御ログを保存
+-- CREATE TABLE controller_settings (
+--   id INT AUTO_INCREMENT PRIMARY KEY,
+--   mode_id INT NOT NULL,
+--   target_temperature DECIMAL(4,1),
+--   target_humidity DECIMAL(4,1),
+--   co2_threshold INT DEFAULT 1000,
+--   energy_saving BOOLEAN DEFAULT FALSE,
+--   FOREIGN KEY (mode_id) REFERENCES modes(id) ON DELETE CASCADE
+-- );

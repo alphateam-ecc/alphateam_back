@@ -4,8 +4,15 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 require('dotenv').config();
 
+//ルートのインポート
+const deviceRoutes = require('./routes/deviceRoutes.js');
+
+
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// ルートミドルウェアの設定
+app.use('/api/devices', deviceRoutes);
 
 //  ミドルウェア設定
 app.use(cors());
