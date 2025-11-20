@@ -23,7 +23,7 @@ function startControlLoop(interval = 10000) {
       const humidity = compensateHumidity(row.humidity);
       const co2 = row.co2;
 
-      // PID cho nhiệt độ
+      // PID logic for temperature control
       const tempPID = new PID(0.5, 0.1, 0.2, 25);
       const output = tempPID.compute(temp);
       controlDevice('heater', output > 0 ? 'on' : 'off');
